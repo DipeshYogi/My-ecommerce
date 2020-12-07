@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=E:\projects\BoboApeBackend\BonoEnv"
+set "VIRTUAL_ENV=E:\projects\BonoApeBackend\bonoenv"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
@@ -13,7 +13,7 @@ if defined _OLD_VIRTUAL_PROMPT (
     )
 )
 if not defined VIRTUAL_ENV_DISABLE_PROMPT (
-    set "PROMPT=(BonoEnv) %PROMPT%"
+    set "PROMPT=(bonoenv) %PROMPT%"
 )
 
 REM Don't use () to avoid problems with them in %PATH%

@@ -75,6 +75,18 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class GetCategorySerializer(serializers.ModelSerializer):
+    """Serializr for categories"""
+    img_url = serializers.SerializerMethodField()
+    class Meta:
+        model = Category
+        fields = ('cat_name', 'img', 'img_url')
+
+    def get_img_url(self, cat):
+        request = self.context.get('request')
+        img_url = cat.img.url
+        return request.build_absolute_uri(img_url)
+
 class GetShopByCatSerializer(serializers.Serializer):
     cat_name = serializers.CharField(max_length=25)
 

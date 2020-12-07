@@ -9,5 +9,6 @@ urlpatterns = [
     path('shop-profile/items/update/<int:id>/<int:shopid>/', \
           views.UpdateItemByShop.as_view()),
     path('categories/', views.GetCategoryInfo.as_view()),
+    path('categories/add/', views.AddCategory.as_view()),
     path('categories/shops/', views.GetShopsByCategory.as_view())
 ]

@@ -1,11 +1,16 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
+
+def upload_to(instance, filename):
+    return 'category/{filename}'.format(filename=filename)
 
 class Category(models.Model):
+    """Category model"""
     cat_name = models.CharField(max_length=50, primary_key=True)
+    img = models.ImageField(_("Image"), upload_to=upload_to, default='default/category.jpg')
     desc = models.CharField(max_length=300, null=True, blank=True)
-
     class Meta:
         verbose_name_plural = 'Categories'
 

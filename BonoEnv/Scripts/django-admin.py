@@ -1,4 +1,4 @@
-#!e:\projects\boboapebackend\bonoenv\scripts\python.exe
+#!e:\projects\bonoapebackend\bonoenv\scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

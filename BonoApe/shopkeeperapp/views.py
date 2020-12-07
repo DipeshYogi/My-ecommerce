@@ -4,9 +4,10 @@ from .models import ShopProfile, ShopItems, Category
 from .serializers import ShopProfileSerializer, ShopProfileUpdateSerializer, \
                          ShopItemSerializer, ShopItemDetailsSerializer, \
                          ShopItemUpdateSerializer, CategorySerializer, \
-                         GetShopByCatSerializer
+                         GetShopByCatSerializer, GetCategorySerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class ShopProfileList(APIView):
@@ -113,12 +114,23 @@ class UpdateItemByShop(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class AddCategory(APIView):
+    """Add new categories"""
+    parser_classes = [MultiPartParser, FormParser]
+    def post(self, request, format=None):
+        serializer = CategorySerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 class GetCategoryInfo(APIView):
     """Retreive category information"""
 
     def get(self, request, format=None):
         categories = Category.objects.all()
-        serializer = CategorySerializer(categories, many=True)
+        serializer = GetCategorySerializer(categories, many=True, context={"request": request})
 
         return Response(serializer.data)
 
